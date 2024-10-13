@@ -1,22 +1,24 @@
 import mongoose from "mongoose";
-const {Schema} = mongoose;
+const { Schema } = mongoose;
 
-
-//table has coulmns and name articleSchema
-const articleSchema = new Schema({
-    title:{
-        type: String,
-        required: true
+const articleSchema = new Schema(
+  {
+    title: {
+      type: String,
+      required: true,
     },
-    body: String ,
+    body: String,
     editor: String,
-    isEmployee: Boolean
-
-},
-{timestamps:true}
+    isEmployee: Boolean,
+    author: {
+      type: Schema.Types.ObjectId,
+      ref: 'User', 
+      required: true,
+    },
+  },
+  { timestamps: true }
 );
 
-//
-const Atricle = mongoose.model('Article', articleSchema);
+const Article = mongoose.model('Article', articleSchema);
 
-export default Atricle;
+export default Article;
